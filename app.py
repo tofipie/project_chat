@@ -37,14 +37,14 @@ def asker_node(state: AgentState):
     if not state.get("data_type"): missing.append("סוג הנתונים (CSV, SQL וכו')")
     if not state.get("budget"): missing.append("תקציב מוערך")
     
-    if not missing:
-        return {"is_complete": True, "next_question": "מעולה! אספתי את כל המידע הנדרש. תודה רבה."}
+    #if not missing:
+     #   return {"is_complete": True, "next_question": "מעולה! אספתי את כל המידע הנדרש. תודה רבה."}
     
     #llm = ChatOpenAI(model="gpt-4o", api_key=st.secrets["OPENAI_API_KEY"])
-    else:
-        llm  = ChatGroq(model="llama-3.1-8b-instant", temperature=0.5)
-        question = llm.invoke(f"שאל שאלה קצרה רק על: {missing[0]}. מידע קיים: {state}").content
-        return {"next_question": question, "is_complete": False}
+    
+    llm  = ChatGroq(model="llama-3.1-8b-instant", temperature=0.5)
+    question = llm.invoke(f"שאל שאלה קצרה רק על: {missing[0]}. מידע קיים: {state}").content
+    return {"next_question": question, "is_complete": False}
 
 # בניית הגרף (Compiled Graph)
 workflow = StateGraph(AgentState)
