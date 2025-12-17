@@ -37,7 +37,7 @@ def asker_node(state: AgentState):
     if not state.get("data_type"): missing.append("סוג הנתונים (CSV, SQL וכו')")
     if not state.get("budget"): missing.append("תקציב מוערך")
     
-    if not missing:
+    if missing:
         return {"is_complete": True, "next_question": "מעולה! אספתי את כל המידע הנדרש. תודה רבה."}
     
     #llm = ChatOpenAI(model="gpt-4o", api_key=st.secrets["OPENAI_API_KEY"])
